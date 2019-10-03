@@ -24,10 +24,21 @@ const Dashboard = () => {
   return (
     <div>
       <Display strikes={strikes} balls={balls} />
-      <button onClick={() => setStrikes(num => ++num)}>Strike</button>
-      <button onClick={() => setBalls(num => ++num)}>Ball</button>
-      <button onClick={handleFoul}>Foul</button>
-      <button onClick={handleHit}>Hit</button>
+      <button
+        data-testid="strikeButton"
+        onClick={() => setStrikes(num => ++num)}
+      >
+        Strike
+      </button>
+      <button data-testid="ballButton" onClick={() => setBalls(num => ++num)}>
+        Ball
+      </button>
+      <button data-testid="foulButton" onClick={handleFoul}>
+        Foul
+      </button>
+      <button data-testid="hitButton" onClick={handleHit}>
+        Hit
+      </button>
     </div>
   );
 };
