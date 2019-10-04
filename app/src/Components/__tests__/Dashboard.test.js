@@ -100,4 +100,45 @@ describe("Reset Balls and Strikes", () => {
     expect(getByTestId("strikeCount")).toHaveTextContent("0");
     expect(getByTestId("ballCount")).toHaveTextContent("0");
   });
+
+  test("Clicks Out button and reset strikes and balls to 0", () => {
+    const { getByTestId } = render(<Dashboard />);
+
+    fireEvent.click(getByTestId("strikeButton"));
+    fireEvent.click(getByTestId("ballButton"));
+    fireEvent.click(getByTestId("outButton"));
+
+    expect(getByTestId("strikeCount")).toHaveTextContent("0");
+    expect(getByTestId("ballCount")).toHaveTextContent("0");
+  });
+});
+
+describe("Outs", () => {
+  test("Click Outs button and increases outs by 1", () => {
+    const { getByTestId } = render(<Dashboard />);
+
+    fireEvent.click(getByTestId("outButton"));
+
+    expect(getByTestId("outCount")).toHaveTextContent("1");
+  });
+
+  test("Click Outs button 3 times and resets outs to 0", () => {
+    const { getByTestId } = render(<Dashboard />);
+
+    fireEvent.click(getByTestId("outButton"));
+    fireEvent.click(getByTestId("outButton"));
+    fireEvent.click(getByTestId("outButton"));
+
+    expect(getByTestId("outCount")).toHaveTextContent("0");
+  });
+
+  test("Click strike button 3 times and increases outs by 1", () => {
+    const { getByTestId } = render(<Dashboard />);
+
+    fireEvent.click(getByTestId("strikeButton"));
+    fireEvent.click(getByTestId("strikeButton"));
+    fireEvent.click(getByTestId("strikeButton"));
+
+    expect(getByTestId("outCount")).toHaveTextContent("1");
+  });
 });

@@ -4,13 +4,29 @@ import Display from "./Display";
 const Dashboard = () => {
   const [strikes, setStrikes] = useState(0);
   const [balls, setBalls] = useState(0);
+  const [outs, setOuts] = useState(0);
 
   useEffect(() => {
-    if (balls === 4 || strikes === 3) {
+    if (balls === 4) {
       setStrikes(0);
       setBalls(0);
     }
+
+    if (strikes === 3) {
+      setStrikes(0);
+      setBalls(0);
+      setOuts(num => ++num);
+    }
   }, [strikes, balls]);
+
+  useEffect(() => {
+    setStrikes(0);
+    setBalls(0);
+
+    if (outs === 3) {
+      setOuts(0);
+    }
+  }, [outs]);
 
   const handleHit = () => {
     setStrikes(0);
@@ -23,7 +39,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Display strikes={strikes} balls={balls} />
+      <Display strikes={strikes} balls={balls} outs={outs} />
       <button
         data-testid="strikeButton"
         onClick={() => setStrikes(num => ++num)}
@@ -38,6 +54,9 @@ const Dashboard = () => {
       </button>
       <button data-testid="hitButton" onClick={handleHit}>
         Hit
+      </button>
+      <button data-testid="outButton" onClick={() => setOuts(num => ++num)}>
+        Outs
       </button>
     </div>
   );
